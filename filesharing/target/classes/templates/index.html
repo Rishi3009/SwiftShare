@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Sharing App</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1>SwiftShare</h1>
+        <h4>A Seamless File Sharing Application</h4>
+    </div>
+</header>
+
+<div class="container">
+    <section class="upload-section">
+        <h2>Upload Your File</h2>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" required>
+            <button type="submit">Upload</button>
+        </form>
+        <p th:if="${message}" th:text="${message}" class="error-message"></p>
+    </section>
+
+    <section class="files-list">
+        <h2>Uploaded Files</h2>
+        <ul>
+            <li th:each="file : ${files}">
+                <a th:href="@{/download/{fileName}(fileName=${file.fileName})}" th:text="${file.fileName}"></a>
+            </li>
+        </ul>
+    </section>
+</div>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2025 File Sharing App. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>
